@@ -1,0 +1,4 @@
+interface IStream : IWrapper
+{
+
+}
