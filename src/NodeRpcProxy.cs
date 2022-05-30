@@ -7,7 +7,7 @@ public class UnmanagedNodeRpcProxy
 {
     /* Constructor */
     [DllImport("TalleoWrapper", CharSet = CharSet.Ansi)]
-    public static extern IntPtr NodeRpcProxy_Create(string nodeHost, UInt16 nodePort, IntPtr logger);
+    public static extern IntPtr NodeRpcProxy_Create(string nodeHost, UInt16 nodePort, string nodePath, bool useSSL, IntPtr logger);
 
     /* Destructor */
     [DllImport("TalleoWrapper")]
@@ -107,9 +107,9 @@ namespace Talleo
     {
         private IntPtr wrappedClass;
 
-        public NodeRpcProxy(in String nodeHost, UInt16 nodePort, in Logging.ILogger logger)
+        public NodeRpcProxy(in String nodeHost, UInt16 nodePort, in string nodePath, in bool useSSL, in Logging.ILogger logger)
         {
-            wrappedClass = UnmanagedNodeRpcProxy.NodeRpcProxy_Create(nodeHost, nodePort, logger.unwrap());
+            wrappedClass = UnmanagedNodeRpcProxy.NodeRpcProxy_Create(nodeHost, nodePort, nodePath, useSSL, logger.unwrap());
         }
         protected NodeRpcProxy(IntPtr node)
         {
