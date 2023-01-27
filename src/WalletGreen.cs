@@ -25,6 +25,8 @@ public class UnmanagedWalletGreen
     [DllImport("TalleoWrapper", CharSet = CharSet.Ansi)]
     public static extern void WalletGreen_loadWithExtra(IntPtr wallet, string path, string password, string extra);
     [DllImport("TalleoWrapper")]
+    public static extern void WalletGreen_repair(IntPtr wallet);
+    [DllImport("TalleoWrapper")]
     public static extern void WalletGreen_shutdown(IntPtr wallet);
 
     [DllImport("TalleoWrapper", CharSet = CharSet.Ansi)]
@@ -240,6 +242,10 @@ namespace Talleo
         void load(string path, string password, string extra)
         {
             UnmanagedWalletGreen.WalletGreen_loadWithExtra(wrappedClass, path, password, extra);
+        }
+        void repair()
+        {
+            UnmanagedWalletGreen.WalletGreen_repair(wrappedClass);
         }
         void shutdown()
         {
